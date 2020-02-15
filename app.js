@@ -1,72 +1,40 @@
-import apiKey from './config.js';
+const axios = require('axios');
 
-var SanFrancisco = 'San Francisco, California'
 
-var categories = {
-    Italian: '7315025',
-    Thai: '7315048',
-    French: '7315017'
+require('dotenv').config()
+
+
+let key = process.env.TOM_TOM_KEY;
+coordinates = [
+    { lat:37.792594, lon:-122.394724},
+    { lat:37.790576, lon:-122.405324},
+    { lat:37.791118, lon:-122.417384}
+]
+
+function convertCoordinatesToTomTom(coordinates){
+    var coordinateString = "";
+    for (i = 0; i < coordinates.length; i++){
+        //Encode coordinate record
+        coordinateString += coordinates[i].lat + "," + coordinates[i].lon;
+
+        //Add colon between coordinate records
+        if (i != coordinates.length-1){
+            coordinates+=":";
+        }
+    }
 }
 
-var map = tt.map({
-    key: apiKey,
-    container: 'map',
-    style: 'tomtom://vector/1/basic-main'
+
+console.log("Making a request to TomTom");
+let urlCoordinates = convertCoordinatesToTomTom(coordinates);
+axios.get("https://api.tomtom.com/routing/1/calculateRoute/52.50931%2C13.42936%3A52.50274%2C13.43872/xml?avoid=unpavedRoads&key="+key)
+.then(response => {
+    console.log(response.data.url);
+    console.log(response.data.explanation);
+
+})  
+.catch(error => {
+    console.log(error);
 });
 
-var markers = [];
-map.addControl(new tt.FullscreenControl());
-map.addControl(new tt.NavigationControl());
 
-map.on('load', function() {
-    tt.services.fuzzySearch({
-        key: apiKey,
-        idxSet: "Geo",
-        query: SanFrancisco
-    })
-    .go()
-    .then(response => moveMapToFirstResult(response))
-})
-
-var buttons = document.querySelectorAll('.searchBtn')
-buttons.forEach(button => {
-    button.addEventListener('click', (event) => {
-        markers.forEach((marker) => {
-            marker.remove();
-        })
-        markers = [];
-        tt.services.fuzzySearch({
-            key: apiKey,
-            center: map.getCenter(),
-            query: 'restaurant',
-            categorySet: categories[event.target.value]
-        })
-        .go()
-        .then(response => createMarkersFromSearch(response)
-        )
-    })
-})
-function moveMapToFirstResult(response) {
-    map.flyTo(
-       {center: response.results[0].position,
-       zoom: 12}
-    )
-}
-function createMarkersFromSearch(response) {
-    response.results.forEach(result => {
-        var popup = new tt.Popup({offset: 30}).setHTML(createPopupContent(result));
-        markers.push(new tt.Marker()
-                .setLngLat(result.position)
-                .setPopup(popup)
-                .addTo(map));
-    })
-}
-function createPopupContent(result) {
-    return '<strong>' + result.poi.name + '</strong><br>' + 
-        ifDefined(result.address.streetNumber) + ' ' + ifDefined(result.address.streetName) + ' ' + result.address.municipality + '<br>' +
-        ((result.poi.phone != undefined) ? 'Phone:' + result.poi.phone + '<br>' : '') +
-        ((result.poi.url != undefined) ? '<a href="http://' + result.poi.url + '" target="_blank">Website</a><br>': '');
-}
-function ifDefined(tmp) {
-    return (tmp != undefined) ? tmp : '';
-}
