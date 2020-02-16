@@ -1,6 +1,5 @@
 const axios = require('axios');
-
-
+const directions = require('./directions.js');
 require('dotenv').config()
 
 
@@ -29,21 +28,5 @@ function convertCoordinatesToTomTom(coordinates){
 
 
 console.log("Making a request to TomTom");
-let urlCoordinates = convertCoordinatesToTomTom(coordinates);
-axios.get(`https://api.tomtom.com/routing/1/calculateRoute/${urlCoordinates}/json?instructionsType=text&computeBestOrder=true&avoid=unpavedRoads&travelMode=car&key=`+key)
-.then(response => {
-    let routes = response.data.routes;
-
-    routes.forEach(route => {
-        let instructions = route.guidance.instructions;
-        instructions.forEach(instruction => {
-            console.log(instruction.message);
-        });
-    });
-
-})  
-.catch(error => {
-    console.log(error);
-  });
-
+directions.getDirections(coordinates,key);
 
