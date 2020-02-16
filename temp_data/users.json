@@ -1,0 +1,20 @@
+{
+    "users":
+    [{
+        "username": "Greg",
+        "email": "Greg@Fork2Farm.com"
+    },
+        {
+        "username": "Colin",
+        "email": "Colin@Fork2Farm.com"
+    },
+    {
+        "username":"Henry",
+        "email":"Henry@Fork2Farm.com"
+    },
+    {
+        "username":"Taku",
+        "email":"Taku@Fork2Farm.com"
+    }]
+
+}

@@ -1,0 +1,36 @@
+{
+    "restaurants":[
+        {
+        "id":"1",
+        "name":"International Smoke",
+        "telephone":"415-543-7474",
+        "lat":"37.790839",
+        "lng":"-122.395906",
+        "email":"information@iSmoke.com"
+        },
+        {
+        "id":"2",
+        "name":"PerDiem",
+        "telephone":"415989-0300",
+        "lat":"37.790066",
+        "lng":"-122.401221",
+        "email":"Test@perdiem.com"
+        },
+        {
+        "id":"3",
+        "name":"Park Tavern",
+        "telephone":"415-989-7300",
+        "lat":"37.801083",
+        "lng":"-122.409218",
+        "email":"Park@Tavern.com"
+        },
+        {
+        "id":"4",
+        "name":"The Cavalier",
+        "telephone":"415-321-6000",
+        "lat":"37.783355",
+        "lng":"-122.406997",
+        "email":"Cavalier@Zetta.com"
+        }
+    ]
+}

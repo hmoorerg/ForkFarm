@@ -1,0 +1,36 @@
+{
+    "farms":[
+        {
+        "id":"1",
+        "name":"Porky's",
+        "telephone":"510-987-6543",
+        "lat":"38.011108",
+        "lng":"-122.704504",
+        "email":"Pork@Porkies.com"
+        },
+        {
+        "id":"2",
+        "name":"MooCow",
+        "telephone":"415-123-4567",
+        "lat":"38.039156",
+        "lng":"-122.588653",
+        "email":"Moo@Cow.com"
+        },
+        {
+        "id":"3",
+        "name":"DairyCows",
+        "telephone":"510-456-7890",
+        "lat":"37.869264",
+        "lng":"-122.174342",
+        "email":"GoMoo@Cow.com"
+        },
+        {
+        "id":"4",
+        "name":"Swine",
+        "telephone":"707-123-4567",
+        "lat":"38.215056",
+        "lng":"-122.626022",
+        "email":"Bacon@Porkies.com"
+        }
+    ]
+}
